@@ -82,7 +82,8 @@
         "custom": "enforce",
         "explicitSpread": "ignore"
       }
-    ]
+    ],
+    "react/jsx-props-no-spreading": "off"
   },
   "overrides": [
     {

@@ -92,6 +92,14 @@ model UserService {
   @@id([userId, serviceId])
 }
 
+model Watch {
+  id           String @id @default(cuid())
+  originUserId String
+  destUserId   String
+
+  @@unique([originUserId, destUserId])
+}
+
 enum Sex {
   MAN
   WOMAN

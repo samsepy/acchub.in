@@ -9,6 +9,7 @@ export default async function usersIndex(
   switch (req.method) {
     case "GET": {
       const users = await prisma.user.findMany({
+        take: 10,
         orderBy: [
           {
             createdAt: "desc",

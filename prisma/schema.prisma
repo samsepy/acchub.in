@@ -86,6 +86,7 @@ model Service {
   name      String   @unique
   url       String   @unique
   users     UserService[]
+  icon      String   @default("GoLinkExternal")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

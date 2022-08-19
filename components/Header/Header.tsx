@@ -11,7 +11,7 @@ export const Header: FC = () => {
 
   if (session) {
     return (
-      <div className="flex items-center justify-between py-3 px-2">
+      <header className="flex items-center justify-between py-3 px-2 border-b">
         <Link href="/top">
           <a>
             <div className="text-2xl">acchub</div>
@@ -56,7 +56,7 @@ export const Header: FC = () => {
             </div>
           )}
         </div>
-      </div>
+      </header>
     );
   }
 

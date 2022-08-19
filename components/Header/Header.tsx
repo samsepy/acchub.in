@@ -53,7 +53,12 @@ export const Header: FC = () => {
   return (
     <div className="flex items-center justify-between py-3 px-2">
       <div className="text-4xl">acchub</div>
-      <button onClick={() => signIn()} className="bg-black text-white p-2 rounded">Sign in</button>
+      <button
+        onClick={() => signIn()}
+        className="bg-black text-white p-2 rounded"
+      >
+        Sign in
+      </button>
     </div>
   );
 };

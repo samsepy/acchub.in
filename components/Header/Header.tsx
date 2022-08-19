@@ -12,7 +12,11 @@ export const Header: FC = () => {
   if (session) {
     return (
       <div className="flex items-center justify-between py-3 px-2">
-        <div className="text-4xl">acchub</div>
+        <Link href="/top">
+          <a>
+            <div className="text-2xl">acchub</div>
+          </a>
+        </Link>
         <div className="relative">
           <button type="button">
             <Image

@@ -61,42 +61,49 @@ const Home: NextPage = ({
     <div className="bg-gray-50 h-screen">
       <div className="container max-w-3xl pt-5">
         <div className="mb-10">
-        {users.map((user) => {
-          return (
-            <div
-              className="p-4 mb-2 bg-white border rounded-lg flex"
-              key={user.id}
-            >
-              <div className="mr-4">
-                <Image
-                  src={user.image ?? "https://i.imgur.com/CgUjxSp.png"}
-                  className="rounded-full"
-                  height={75}
-                  width={75}
-                  alt="user logo"
-                />
-              </div>
-              <div>
-                <div>{user?.profile?.screenName}</div>
-                <div className="flex">
-                  {user.services.map((service) => {
-                    return (
-                      <div className="mr-2">
-                        <a
-                          href={
-                            new URL(service.screenName, service.service.url)
-                          }
-                        >
-                          <DynamicFaIcon name={service.service.icon} />
-                        </a>
-                      </div>
-                    );
-                  })}
+          {users.map((user) => {
+            return (
+              <div
+                className="p-4 mb-2 bg-white border rounded-lg flex"
+                key={user.id}
+              >
+                <div className="mr-4" style={{ height: "75px" }}>
+                  <Image
+                    src={user.image ?? "https://i.imgur.com/CgUjxSp.png"}
+                    className="rounded-full"
+                    height={75}
+                    width={75}
+                    alt="user logo"
+                  />
+                </div>
+                <div  className="flex flex-col justify-between pb-3">
+                  <div>
+                    <div className="leading-5">
+                      {user?.profile?.displayName}
+                    </div>
+                    <div className="leading-5 text-gray-500">
+                      @{user?.profile?.screenName}
+                    </div>
+                  </div>
+                  <div className="flex">
+                    {user.services.map((service) => {
+                      return (
+                        <div className="mr-2">
+                          <a
+                            href={
+                              new URL(service.screenName, service.service.url)
+                            }
+                          >
+                            <DynamicFaIcon name={service.service.icon} />
+                          </a>
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
         </div>
         <div className="flex justify-center">
           <div className="mb-3 xl:w-96">

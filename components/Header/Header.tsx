@@ -13,12 +13,12 @@ export const Header: FC = () => {
     return (
       <header className="flex items-center justify-between py-3 px-2 border-b">
         <Link href="/top">
-          <a>
-            <div className="text-2xl">acchub</div>
+          <a style={{ height: "45px" }}>
+            <Image src="/images/logo.png" height={45} width={125} alt="logo" />
           </a>
         </Link>
-        <div className="relative">
-          <button type="button">
+        <div className="relative" style={{ height: "40px" }}>
+          <button type="button" style={{ height: "40px" }}>
             <Image
               src={session.user.image ?? "https://i.imgur.com/CgUjxSp.png"}
               className="rounded-full"

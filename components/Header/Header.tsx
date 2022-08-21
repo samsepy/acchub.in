@@ -30,7 +30,7 @@ export const Header: FC = () => {
           </button>
           {dropDownToggle && (
             <div
-              className="absolute top-12 right-0 border rounded px-4 py-3"
+              className="absolute top-12 right-0 border rounded px-4 py-3 z-50 bg-white"
               style={{ width: "200px" }}
             >
               <div className="mb-3">

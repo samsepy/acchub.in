@@ -9,6 +9,7 @@ import { prisma } from "@/lib/prisma";
 export const getServerSideProps = async (
   context: GetServerSidePropsContext,
 ) => {
+  const queryKeyword = context.query.keyword;
   const users = await prisma.user.findMany({
     take: 10,
     orderBy: [
@@ -16,6 +17,48 @@ export const getServerSideProps = async (
         createdAt: "desc",
       },
     ],
+    where: {
+      OR: [
+        {
+          profile: {
+            screenName: queryKeyword,
+          },
+        },
+        {
+          profile: {
+            displayName: queryKeyword,
+          },
+        },
+        {
+          profile: {
+            screenName: {
+              startsWith: queryKeyword,
+            },
+          },
+        },
+        {
+          profile: {
+            screenName: {
+              endsWith: queryKeyword,
+            },
+          },
+        },
+        {
+          profile: {
+            displayName: {
+              startsWith: queryKeyword,
+            },
+          },
+        },
+        {
+          profile: {
+            displayName: {
+              endsWith: queryKeyword,
+            },
+          },
+        },
+      ],
+    },
     select: {
       id: true,
       image: true,
@@ -36,11 +79,15 @@ export const getServerSideProps = async (
   });
 
   return {
-    props: { users },
+    props: {
+      queryKeyword,
+      users,
+    },
   };
 };
 
-const Home: NextPage = ({
+const UsersSearchIndex: NextPage = ({
+  queryKeyword,
   users,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const router = useRouter();
@@ -60,7 +107,9 @@ const Home: NextPage = ({
   return (
     <div className="bg-gray-50 h-screen">
       <div className="container max-w-3xl pt-5">
-        <h1 className="text-lg mb-2">最近追加されたユーザー</h1>
+        <h1 className="text-lg mb-2">
+          Search: <span className="font-bold">{queryKeyword}</span>
+        </h1>
         <div className="mb-10">
           {users.map((user) => {
             return (
@@ -151,4 +200,4 @@ const Home: NextPage = ({
   );
 };
 
-export default Home;
+export default UsersSearchIndex;

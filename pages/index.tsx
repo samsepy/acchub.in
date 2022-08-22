@@ -60,6 +60,7 @@ const Home: NextPage = ({
   return (
     <div className="bg-gray-50 h-screen">
       <div className="container max-w-3xl pt-5">
+        <h1 className="text-lg font-bold mb-2">最近追加されたユーザー</h1>
         <div className="mb-10">
           {users.map((user) => {
             return (
@@ -76,7 +77,7 @@ const Home: NextPage = ({
                     alt="user logo"
                   />
                 </div>
-                <div  className="flex flex-col justify-between pb-3">
+                <div className="flex flex-col justify-between pb-3">
                   <div>
                     <div className="leading-5">
                       {user?.profile?.displayName}

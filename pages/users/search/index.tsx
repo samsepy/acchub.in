@@ -138,7 +138,7 @@ const UsersSearchIndex: NextPage = ({
                   <div className="flex">
                     {user.services.map((service) => {
                       return (
-                        <div className="mr-2">
+                        <div className="mr-2" key={service.service.name}>
                           <a
                             href={
                               new URL(service.screenName, service.service.url)

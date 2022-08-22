@@ -91,7 +91,7 @@ const UsersSearchIndex: NextPage = ({
   users,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const router = useRouter();
-  const [keyword, setKeyword] = useState();
+  const [keyword, setKeyword] = useState("");
 
   const clickButton = () => {
     if (!keyword) {

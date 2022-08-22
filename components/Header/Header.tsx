@@ -12,9 +12,15 @@ export const Header: FC = () => {
   if (session) {
     return (
       <header className="flex items-center justify-between py-3 px-2 border-b">
-        <Link href="/top">
+        <Link href="/">
           <a style={{ height: "45px" }}>
-            <Image src="/images/logo.png" height={45} width={125} alt="logo" className="rounded-lg" />
+            <Image
+              src="/images/logo.png"
+              height={45}
+              width={125}
+              alt="logo"
+              className="rounded-lg"
+            />
           </a>
         </Link>
         <div className="relative" style={{ height: "40px" }}>

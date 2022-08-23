@@ -54,7 +54,7 @@ export const Header: FC = () => {
               <hr className="mb-3" />
               <div className="mb-3">
                 <Link href="/me/settings">
-                  <a>ユーザー設定</a>
+                  <a>User settings</a>
                 </Link>
               </div>
               <hr className="mb-3" />

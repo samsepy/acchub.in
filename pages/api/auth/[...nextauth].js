@@ -21,9 +21,10 @@ export default NextAuth({
           where: {
             id: userId,
           },
-          include: { profile: true },
+          include: { profile: true, services: true },
         });
         session.user.profile = userData?.profile ?? null;
+        session.user.services = userData?.services ?? null;
       }
 
       return session;

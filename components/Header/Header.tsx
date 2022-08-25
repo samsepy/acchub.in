@@ -54,7 +54,7 @@ export const Header: FC = () => {
               <hr className="mb-3" />
               <div className="mb-3">
                 <Link href="/me/settings">
-                  <a>ユーザー設定</a>
+                  <a>User settings</a>
                 </Link>
               </div>
               <hr className="mb-3" />
@@ -67,14 +67,24 @@ export const Header: FC = () => {
   }
 
   return (
-    <div className="flex items-center justify-between py-3 px-2">
-      <div className="text-4xl">acchub</div>
+    <header className="flex items-center justify-between py-3 px-2 border-b">
+      <Link href="/">
+        <a style={{ height: "45px" }}>
+          <Image
+            src="/images/logo.png"
+            height={45}
+            width={125}
+            alt="logo"
+            className="rounded-lg"
+          />
+        </a>
+      </Link>
       <button
         onClick={() => signIn()}
         className="bg-black text-white p-2 rounded"
       >
         Sign in
       </button>
-    </div>
+    </header>
   );
 };

@@ -60,7 +60,7 @@ const Home: NextPage = ({
   return (
     <div className="bg-gray-50 h-screen">
       <div className="container max-w-3xl pt-5">
-        <h1 className="text-lg mb-2">最近追加されたユーザー</h1>
+        <h1 className="text-lg mb-2">Recently added users</h1>
         <div className="mb-10">
           {users.map((user) => {
             return (

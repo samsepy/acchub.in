@@ -4,6 +4,7 @@ import { useState } from "react";
 import { IoIosAddCircleOutline } from "react-icons/io";
 
 import { prisma } from "@/lib/prisma";
+import * as api from "@/services";
 
 export const getServerSideProps = async (
   context: GetServerSidePropsContext,
@@ -60,6 +61,16 @@ const MeSettingsIndex: NextPage = ({
         serviceId: "",
       },
     ]);
+  };
+
+  const putProfile: FormEventHandler<HTMLFormElement> = async (e) => {
+    e.preventDefault();
+    await api.patchMeProfile({
+      displayName,
+      screenName,
+      bio,
+      siteUrl: webSite,
+    });
   };
 
   return (
@@ -208,6 +219,7 @@ const MeSettingsIndex: NextPage = ({
             <button
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               type="button"
+              onClick={putProfile}
             >
               Update
             </button>

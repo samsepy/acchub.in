@@ -35,6 +35,7 @@ const MeSettingsIndex: NextPage = ({
   if (session?.user.services.length) {
     services = session?.user.services.map((service, i) => ({
       id: i + 1,
+      userId: session?.user.id,
       serviceId: service.serviceId,
       screenName: service.screenName,
     }));
@@ -42,7 +43,8 @@ const MeSettingsIndex: NextPage = ({
     services = [
       {
         id: 1,
-        serviecId: "",
+        userId: session?.user.id,
+        serviceId: "",
         screenName: "",
       },
     ];
@@ -57,8 +59,9 @@ const MeSettingsIndex: NextPage = ({
       ...userServices,
       {
         id: userServices.length + 1,
-        screenName: "",
+        userId: session?.user.id,
         serviceId: "",
+        screenName: "",
       },
     ]);
   };
@@ -71,6 +74,13 @@ const MeSettingsIndex: NextPage = ({
       bio,
       siteUrl: webSite,
     });
+    await api.patchMeUserService(
+      userServices.map((userService) => ({
+        userId: userService.userId,
+        serviceId: userService.serviceId,
+        screenName: userService.screenName,
+      })),
+    );
   };
 
   return (
@@ -169,6 +179,7 @@ const MeSettingsIndex: NextPage = ({
                             us.id === userService.id
                               ? {
                                   id: us.id,
+                                  userId: session?.user.id,
                                   screenName: e.target.value,
                                   serviceId: us.serviceId,
                                 }
@@ -189,7 +200,8 @@ const MeSettingsIndex: NextPage = ({
                             us.id === userService.id
                               ? {
                                   id: us.id,
-                                  screenName: us.serviceId,
+                                  userId: session?.user.id,
+                                  screenName: us.screenName,
                                   serviceId: e.target.value,
                                 }
                               : us,
@@ -200,7 +212,9 @@ const MeSettingsIndex: NextPage = ({
                       <option value="">-- Not selected --</option>
                       {serviceList.map((service) => {
                         return (
-                          <option value={service.id}>{service.name}</option>
+                          <option value={service.id} key={service.id}>
+                            {service.name}
+                          </option>
                         );
                       })}
                     </select>

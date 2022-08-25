@@ -20,7 +20,7 @@ export default AuthMiddleware(
         const userServices = req.body as PatchData;
         await prisma.userService.deleteMany({
           where: {
-            userId: session.user.profile?.id,
+            userId: session.user.id,
           },
         });
         const result = await prisma.userService.createMany({

@@ -13,20 +13,17 @@ export default AuthMiddleware(
       case "POST": {
         type PostData = {
           displayName: string;
-          iconUrl: string;
+          screenName: string;
+          bio: string;
+          siteUrl: string;
         };
-        const { displayName = "no name", iconUrl } = req.body as PostData;
-        if (!iconUrl) {
-          return res.status(400).json({ message: "アイコンは必須です。" });
-        }
-        if (displayName.length > 20) {
-          return res.status(400).json({ message: "表示名が長すぎます。" });
-        }
+        const { displayName, screenName, bio, siteUrl } = req.body as PostData;
         const result = await prisma.profile.create({
           data: {
-            bio: "",
             displayName,
-            iconUrl,
+            screenName,
+            bio,
+            siteUrl,
             user: { connect: { id: userId } },
           },
         });
@@ -41,9 +38,6 @@ export default AuthMiddleware(
           siteUrl: string;
         };
         const { displayName, screenName, bio, siteUrl } = req.body as PatchData;
-        // if (!iconUrl) {
-        //   return res.status(400).json({ message: "アイコンは必須です。" });
-        // }
         const result = await prisma.profile.update({
           where: {
             id: session.user.profile?.id,

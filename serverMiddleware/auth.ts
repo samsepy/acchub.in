@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { getSession } from "next-auth/react";
 import { Session } from "next-auth";
+import { getSession } from "next-auth/react";
 
 type Handler = (
   req: NextApiRequest,
@@ -13,5 +13,6 @@ export const AuthMiddleware =
     const session = await getSession({ req });
     if (!session)
       return res.status(401).json({ message: "ログインしてください。" });
+
     return handler(req, res, session);
   };

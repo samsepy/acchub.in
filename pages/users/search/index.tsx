@@ -1,4 +1,5 @@
 import { GetServerSidePropsContext } from "next";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -90,7 +91,13 @@ const UsersSearchIndex: NextPage = ({
   queryKeyword,
   users,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  const { data: session } = useSession();
   const router = useRouter();
+
+  if (session?.user && !session?.user?.profile) {
+    router.push({ pathname: "/me/profile" });
+  }
+
   const [keyword, setKeyword] = useState("");
 
   const clickButton = () => {

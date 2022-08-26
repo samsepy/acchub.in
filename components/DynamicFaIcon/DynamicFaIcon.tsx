@@ -2,7 +2,12 @@ import * as Icons from "react-icons/fa";
 
 import type { FC } from "react";
 
-export const DynamicFaIcon: FC = ({ name }) => {
+type Props = {
+  name: keyof typeof Icons;
+};
+
+export const DynamicFaIcon: FC<Props> = ({ name }) => {
+  // eslint-disable-next-line
   const IconComponent = Icons[name];
 
   if (!IconComponent) {

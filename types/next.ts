@@ -1,4 +1,4 @@
-import { Profile as PrismaProfile } from "@prisma/client";
+import { Profile as PrismaProfile, UserService } from "@prisma/client";
 import { Session } from "next-auth";
 
 export type DefaultPageProps = {
@@ -10,5 +10,6 @@ export type SessionUser = {
   email: string;
   image: string;
   id: string;
+  services: UserService[];
   profile: null | PrismaProfile;
 };

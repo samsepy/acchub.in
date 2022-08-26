@@ -1,4 +1,4 @@
-import { GetServerSidePropsContext } from "next";
+import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
 import { getSession, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useState, FormEventHandler } from "react";
@@ -25,7 +25,7 @@ export const getServerSideProps = async (
   return { props: { session, serviceList } };
 };
 
-const MeSettingsIndex: NextPage = ({
+const MeSettingsIndex = ({
   serviceList,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const { data: session } = useSession();

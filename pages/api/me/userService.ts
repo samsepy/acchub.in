@@ -8,7 +8,6 @@ const prisma = new PrismaClient();
 
 export default AuthMiddleware(
   async (req: NextApiRequest, res: NextApiResponse, session: Session) => {
-    const userId = session.user.id;
     switch (req.method) {
       case "POST": {
         type UserService = {

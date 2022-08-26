@@ -1,7 +1,7 @@
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
 import { getSession, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import { useState, FormEventHandler } from "react";
+import { useState, MouseEventHandler } from "react";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { toast } from "react-toastify";
 
@@ -54,8 +54,8 @@ const MeSettingsIndex = ({
   const router = useRouter();
   const [displayName, setDisplayName] = useState(profile.displayName);
   const [screenName, setScreenName] = useState(profile.screenName);
-  const [bio, setBio] = useState(profile.bio);
-  const [webSite, setWebSite] = useState(profile.siteUrl);
+  const [bio, setBio] = useState(profile.bio ?? "");
+  const [webSite, setWebSite] = useState(profile.siteUrl ?? "");
   const [userServices, setUserServices] = useState(services);
   const [isLoading, setIsLoading] = useState(false);
   const addUserService = () => {
@@ -70,7 +70,7 @@ const MeSettingsIndex = ({
     ]);
   };
 
-  const putProfile: FormEventHandler<HTMLFormElement> = async (e) => {
+  const putProfile: MouseEventHandler<HTMLButtonElement> = async (e) => {
     try {
       if (isLoading) return;
 
@@ -226,7 +226,7 @@ const MeSettingsIndex = ({
                       }
                     >
                       <option value="">-- Not selected --</option>
-                      {serviceList.map((service) => {
+                      {serviceList?.map((service) => {
                         return (
                           <option value={service.id} key={service.id}>
                             {service.name}

@@ -184,6 +184,7 @@ const UsersSearchIndex: NextPage = ({
                 type="button"
                 id="button-addon2"
                 disabled={!keyword}
+                onClick={clickButton}
               >
                 <svg
                   aria-hidden="true"

@@ -1,7 +1,9 @@
 import { GetServerSidePropsContext } from "next";
 import { getSession, useSession } from "next-auth/react";
-import { useState } from "react";
+import { useRouter } from "next/router";
+import { useState, FormEventHandler } from "react";
 import { IoIosAddCircleOutline } from "react-icons/io";
+import { toast } from "react-toastify";
 
 import { prisma } from "@/lib/prisma";
 import * as api from "@/services";
@@ -49,11 +51,13 @@ const MeSettingsIndex: NextPage = ({
       },
     ];
   }
+  const router = useRouter();
   const [displayName, setDisplayName] = useState(profile.displayName);
   const [screenName, setScreenName] = useState(profile.screenName);
   const [bio, setBio] = useState(profile.bio);
   const [webSite, setWebSite] = useState(profile.siteUrl);
   const [userServices, setUserServices] = useState(services);
+  const [isLoading, setIsLoading] = useState(false);
   const addUserService = () => {
     setUserServices([
       ...userServices,
@@ -67,20 +71,32 @@ const MeSettingsIndex: NextPage = ({
   };
 
   const putProfile: FormEventHandler<HTMLFormElement> = async (e) => {
-    e.preventDefault();
-    await api.patchMeProfile({
-      displayName,
-      screenName,
-      bio,
-      siteUrl: webSite,
-    });
-    await api.patchMeUserService(
-      userServices.map((userService) => ({
-        userId: userService.userId,
-        serviceId: userService.serviceId,
-        screenName: userService.screenName,
-      })),
-    );
+    try {
+      if (isLoading) return;
+
+      e.preventDefault();
+      setIsLoading(true);
+      await new Promise((resolve) => setTimeout(resolve, 500));
+      await api.patchMeProfile({
+        displayName,
+        screenName,
+        bio,
+        siteUrl: webSite,
+      });
+      await api.patchMeUserService(
+        userServices.map((userService) => ({
+          userId: userService.userId,
+          serviceId: userService.serviceId,
+          screenName: userService.screenName,
+        })),
+      );
+      router.push("/");
+      toast.success("Successed");
+    } catch (error) {
+      toast.error("Falled");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -234,6 +250,7 @@ const MeSettingsIndex: NextPage = ({
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               type="button"
               onClick={putProfile}
+              disabled={isLoading}
             >
               Update
             </button>

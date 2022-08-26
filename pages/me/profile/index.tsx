@@ -1,6 +1,8 @@
 import { GetServerSidePropsContext } from "next";
 import { getSession, useSession } from "next-auth/react";
-import { useState } from "react";
+import { useRouter } from "next/router";
+import { useState, FormEventHandler } from "react";
+import { toast } from "react-toastify";
 
 import * as api from "@/services";
 
@@ -20,15 +22,28 @@ const MeSettingsIndex: NextPage = () => {
 
   if (!session) return "";
 
+  const router = useRouter();
   const [displayName, setDisplayName] = useState("");
   const [screenName, setScreenName] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const postProfile: FormEventHandler<HTMLFormElement> = async (e) => {
-    e.preventDefault();
-    await api.postMeProfile({
-      displayName,
-      screenName,
-    });
+    try {
+      if (isLoading) return;
+
+      e.preventDefault();
+      setIsLoading(true);
+      await api.postMeProfile({
+        displayName,
+        screenName,
+      });
+      router.push("/");
+      toast.success("Successed");
+    } catch (error) {
+      toast.error("Falled");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -73,6 +88,7 @@ const MeSettingsIndex: NextPage = () => {
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               type="button"
               onClick={postProfile}
+              disabled={isLoading}
             >
               Create
             </button>

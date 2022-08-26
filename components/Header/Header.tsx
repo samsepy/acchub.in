@@ -40,7 +40,9 @@ export const Header: FC = () => {
               style={{ width: "200px" }}
             >
               <div className="mb-3">
-                <Link href="/me/profile">
+                <Link
+                  href={!session.user.profile ? "/me/profile" : "/me/settings"}
+                >
                   <a>
                     <div>
                       {session.user?.profile?.displayName ?? "名前未設定"}
@@ -53,7 +55,9 @@ export const Header: FC = () => {
               </div>
               <hr className="mb-3" />
               <div className="mb-3">
-                <Link href="/me/settings">
+                <Link
+                  href={!session.user.profile ? "/me/profile" : "/me/settings"}
+                >
                   <a>User settings</a>
                 </Link>
               </div>

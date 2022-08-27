@@ -1,13 +1,29 @@
 import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
 import type { FC } from "react";
 
 export const Header: FC = () => {
   const { data: session } = useSession();
   const [dropDownToggle, setDropDownToggle] = useState(false);
+  const popupRef = useRef<HTMLDivElement>(null!);
+
+  const handleClick = (e: any) => {
+    if (popupRef.current?.contains(e.target)) {
+      return;
+    }
+    setDropDownToggle(false);
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClick);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClick);
+    };
+  }, []);
 
   if (session) {
     return (
@@ -23,7 +39,7 @@ export const Header: FC = () => {
             />
           </a>
         </Link>
-        <div className="relative" style={{ height: "40px" }}>
+        <div className="relative" style={{ height: "40px" }} ref={popupRef}>
           <button type="button" style={{ height: "40px" }}>
             <Image
               src={session.user.image ?? "https://i.imgur.com/CgUjxSp.png"}

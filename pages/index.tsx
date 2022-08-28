@@ -1,4 +1,4 @@
-import { GetServerSidePropsContext } from "next";
+import { InferGetServerSidePropsType } from "next";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -6,9 +6,7 @@ import { useState } from "react";
 import { DynamicFaIcon } from "@/components/DynamicFaIcon";
 import { prisma } from "@/lib/prisma";
 
-export const getServerSideProps = async (
-  context: GetServerSidePropsContext,
-) => {
+export const getServerSideProps = async () => {
   const users = await prisma.user.findMany({
     take: 10,
     orderBy: [

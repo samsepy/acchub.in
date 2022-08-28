@@ -32,38 +32,43 @@ const MeSettingsIndex = ({
 
   if (!session) return "";
 
-  const profile = session?.user.profile!;
-  let services;
-  if (session?.user.services.length) {
-    services = session?.user.services.map((service, i) => ({
-      id: i + 1,
-      userId: session?.user.id,
-      serviceId: service.serviceId,
-      screenName: service.screenName,
-    }));
-  } else {
-    services = [
-      {
-        id: 1,
-        userId: session?.user.id,
-        serviceId: "",
-        screenName: "",
-      },
-    ];
-  }
+  const user = session.user;
+  const profile = user.profile!;
+  const services = !user.services.length
+    ? [
+        {
+          id: 1,
+          userId: user.id,
+          serviceId: "",
+          screenName: "",
+        },
+      ]
+    : user.services.map((service, i) => ({
+        id: i + 1,
+        userId: user.id,
+        serviceId: service.serviceId,
+        screenName: service.screenName,
+      }));
+  // eslint-disable-next-line
   const router = useRouter();
+  // eslint-disable-next-line
   const [displayName, setDisplayName] = useState(profile.displayName);
+  // eslint-disable-next-line
   const [screenName, setScreenName] = useState(profile.screenName);
+  // eslint-disable-next-line
   const [bio, setBio] = useState(profile.bio ?? "");
+  // eslint-disable-next-line
   const [webSite, setWebSite] = useState(profile.siteUrl ?? "");
+  // eslint-disable-next-line
   const [userServices, setUserServices] = useState(services);
+  // eslint-disable-next-line
   const [isLoading, setIsLoading] = useState(false);
   const addUserService = () => {
     setUserServices([
       ...userServices,
       {
         id: userServices.length + 1,
-        userId: session?.user.id,
+        userId: user.id,
         serviceId: "",
         screenName: "",
       },
@@ -195,7 +200,7 @@ const MeSettingsIndex = ({
                             us.id === userService.id
                               ? {
                                   id: us.id,
-                                  userId: session?.user.id,
+                                  userId: user.id,
                                   screenName: e.target.value,
                                   serviceId: us.serviceId,
                                 }
@@ -216,7 +221,7 @@ const MeSettingsIndex = ({
                             us.id === userService.id
                               ? {
                                   id: us.id,
-                                  userId: session?.user.id,
+                                  userId: user.id,
                                   screenName: us.screenName,
                                   serviceId: e.target.value,
                                 }

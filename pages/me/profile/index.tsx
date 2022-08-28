@@ -19,13 +19,12 @@ export const getServerSideProps = async (
 
 const MeSettingsIndex: NextPage = () => {
   const { data: session } = useSession();
-
-  if (!session) return "";
-
-  const router = useRouter();
   const [displayName, setDisplayName] = useState("");
   const [screenName, setScreenName] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
+
+  if (!session) return "";
 
   const postProfile: FormEventHandler<HTMLFormElement> = async (e) => {
     try {

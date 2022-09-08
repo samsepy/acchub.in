@@ -74,8 +74,21 @@ const MeSettingsIndex = ({
       },
     ]);
   };
-
   const putProfile: MouseEventHandler<HTMLButtonElement> = async (e) => {
+    const errors: string[] = [];
+    if (!displayName) {
+      errors.push("名前を入力してください");
+    }
+    if (!screenName) {
+      errors.push("アカウントIDを入力してください");
+    }
+    if (errors.length !== 0) {
+      errors.forEach((error) => {
+        toast.error(error);
+      });
+
+      return;
+    }
     try {
       if (isLoading) return;
 

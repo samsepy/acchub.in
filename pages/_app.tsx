@@ -1,5 +1,5 @@
 import "@/styles/globals.css";
-// import { NextPage } from "next";
+import { NextPage } from "next";
 import { SessionProvider, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
@@ -19,7 +19,7 @@ const ProfileChecker: NextPage = ({ children }) => {
     if (user && !user?.profile) {
       router.push({ pathname: "/me/profile" });
     }
-  }, user);
+  }, [user]);
 
   return <>{children}</>;
 };
@@ -27,9 +27,9 @@ const ProfileChecker: NextPage = ({ children }) => {
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return (
     <SessionProvider session={session}>
-      <Header />
-      <ToastContainer />
       <ProfileChecker>
+        <Header />
+        <ToastContainer />
         <Component {...pageProps} />
       </ProfileChecker>
     </SessionProvider>

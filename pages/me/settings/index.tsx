@@ -97,7 +97,9 @@ const MeSettingsIndex = ({
       if (selectedService.has(userServices[i].serviceId)) {
         errors.push("同じサービスアカウントは追加できません");
       } else {
-        selectedService.add(userServices[i].serviceId);
+        if (userServices[i].serviceId) {
+          selectedService.add(userServices[i].serviceId);
+        }
       }
     }
     if (errors.length !== 0) {

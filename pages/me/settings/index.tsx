@@ -87,6 +87,13 @@ const MeSettingsIndex = ({
         errors.push("存在するユーザーです");
       }
     }
+    for (let i = 0; i < userServices.length; i++) {
+      if (!userServices[i].screenName && userServices[i].serviceId) {
+        errors.push("アカウントIDを入力してください");
+      } else if (userServices[i].screenName && !userServices[i].serviceId) {
+        errors.push("利用しているサービスを選択してください");
+      }
+    }
     if (errors.length !== 0) {
       errors.forEach((error) => {
         toast.error(error);

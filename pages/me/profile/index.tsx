@@ -40,9 +40,9 @@ const MeSettingsIndex: NextPage = () => {
       errors.push("アカウントIDを入力してください");
     }
     if (errors.length !== 0) {
-      errors.forEach((error) => {
-        toast.error(error);
-      });
+      for (let i = 0; i < errors.length; i++) {
+        toast.error(errors[i]);
+      }
 
       return;
     }

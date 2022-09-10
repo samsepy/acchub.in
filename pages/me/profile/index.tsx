@@ -30,6 +30,11 @@ const MeSettingsIndex: NextPage = () => {
     const errors: string[] = [];
     if (!displayName) {
       errors.push("名前を入力してください");
+    } else {
+      const userExists = await api.getMeUser(screenName);
+      if (userExists.userExists) {
+        errors.push("存在するユーザーです");
+      }
     }
     if (!screenName) {
       errors.push("アカウントIDを入力してください");

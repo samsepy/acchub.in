@@ -81,6 +81,11 @@ const MeSettingsIndex = ({
     }
     if (!screenName) {
       errors.push("アカウントIDを入力してください");
+    } else {
+      const userExists = await api.getMeUser(screenName);
+      if (userExists.userExists) {
+        errors.push("存在するユーザーです");
+      }
     }
     if (errors.length !== 0) {
       errors.forEach((error) => {

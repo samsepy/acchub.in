@@ -1,4 +1,4 @@
-import { UserService } from "@prisma/client";
+import type { UserService } from "@prisma/client";
 
 import * as request from "@/services/request";
 

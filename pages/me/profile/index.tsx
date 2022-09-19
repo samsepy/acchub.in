@@ -1,7 +1,8 @@
-import { GetServerSidePropsContext } from "next";
-import { getSession, useSession } from "next-auth/react";
+import type { GetServerSidePropsContext } from "next";
 import { useRouter } from "next/router";
-import { useState, FormEventHandler } from "react";
+import { getSession, useSession } from "next-auth/react";
+import type { FormEventHandler} from "react";
+import {useState } from "react";
 import { toast } from "react-toastify";
 
 import * as api from "@/services";

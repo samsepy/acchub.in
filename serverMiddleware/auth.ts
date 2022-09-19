@@ -1,5 +1,5 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import { Session } from "next-auth";
+import type { NextApiRequest, NextApiResponse } from "next";
+import type { Session } from "next-auth";
 import { getSession } from "next-auth/react";
 
 type Handler = (

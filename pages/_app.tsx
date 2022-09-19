@@ -1,14 +1,14 @@
 import "@/styles/globals.css";
-import { NextPage } from "next";
-import { SessionProvider, useSession } from "next-auth/react";
+import "react-toastify/dist/ReactToastify.css";
+
+import type { NextPage } from "next";
+import type { AppProps } from "next/app";
 import { useRouter } from "next/router";
+import { SessionProvider, useSession } from "next-auth/react";
 import { useEffect } from "react";
 import { ToastContainer } from "react-toastify";
 
-import type { AppProps } from "next/app";
-
 import { Header } from "@/components/Header";
-import "react-toastify/dist/ReactToastify.css";
 
 const ProfileChecker: NextPage = ({ children }) => {
   const { data: session } = useSession();

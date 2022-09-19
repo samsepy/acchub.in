@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
-import { NextApiRequest, NextApiResponse } from "next";
-import { Session } from "next-auth";
+import type { NextApiRequest, NextApiResponse } from "next";
+import type { Session } from "next-auth";
 
 import { AuthMiddleware } from "@/serverMiddleware/auth";
 

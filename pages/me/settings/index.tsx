@@ -1,7 +1,8 @@
-import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
-import { getSession, useSession } from "next-auth/react";
+import type { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
 import { useRouter } from "next/router";
-import { useState, MouseEventHandler } from "react";
+import { getSession, useSession } from "next-auth/react";
+import type { MouseEventHandler} from "react";
+import {useState } from "react";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { toast } from "react-toastify";
 

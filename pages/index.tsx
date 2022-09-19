@@ -1,4 +1,4 @@
-import { InferGetServerSidePropsType } from "next";
+import type { InferGetServerSidePropsType } from "next";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useState } from "react";

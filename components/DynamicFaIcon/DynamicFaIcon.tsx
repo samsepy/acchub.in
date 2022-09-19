@@ -1,6 +1,5 @@
-import * as Icons from "react-icons/fa";
-
 import type { FC } from "react";
+import * as Icons from "react-icons/fa";
 
 type Props = {
   name: keyof typeof Icons;

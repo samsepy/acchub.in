@@ -27,10 +27,7 @@ export default AuthMiddleware(
             },
           },
         });
-        const userExists = {
-          userExists: profile ? true : false,
-        };
-
+        const userExists = profile ? true : false;
         return res.status(200).json(userExists);
       }
     }

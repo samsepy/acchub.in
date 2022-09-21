@@ -2,6 +2,7 @@ import type { InferGetServerSidePropsType } from "next";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import type * as Icons from "react-icons/fa";
 
 import { DynamicFaIcon } from "@/components/DynamicFaIcon";
 import { prisma } from "@/lib/prisma";
@@ -38,7 +39,7 @@ export const getServerSideProps = async () => {
   };
 };
 
-const Home: NextPage = ({
+const Home = ({
   users,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const router = useRouter();
@@ -91,9 +92,12 @@ const Home: NextPage = ({
                           <a
                             href={
                               new URL(service.screenName, service.service.url)
+                                .href
                             }
                           >
-                            <DynamicFaIcon name={service.service.icon} />
+                            <DynamicFaIcon
+                              name={service.service.icon as keyof typeof Icons}
+                            />
                           </a>
                         </div>
                       );

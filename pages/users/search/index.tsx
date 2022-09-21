@@ -1,7 +1,11 @@
-import type { GetServerSidePropsContext } from "next";
+import type {
+  GetServerSidePropsContext,
+  InferGetServerSidePropsType,
+} from "next";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import type * as Icons from "react-icons/fa";
 
 import { DynamicFaIcon } from "@/components/DynamicFaIcon";
 import { prisma } from "@/lib/prisma";
@@ -9,7 +13,7 @@ import { prisma } from "@/lib/prisma";
 export const getServerSideProps = async (
   context: GetServerSidePropsContext,
 ) => {
-  const queryKeyword = context.query.keyword;
+  const queryKeyword = context.query.keyword as string;
   const users = await prisma.user.findMany({
     take: 10,
     orderBy: [
@@ -86,7 +90,7 @@ export const getServerSideProps = async (
   };
 };
 
-const UsersSearchIndex: NextPage = ({
+const UsersSearchIndex = ({
   queryKeyword,
   users,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
@@ -142,9 +146,12 @@ const UsersSearchIndex: NextPage = ({
                           <a
                             href={
                               new URL(service.screenName, service.service.url)
+                                .href
                             }
                           >
-                            <DynamicFaIcon name={service.service.icon} />
+                            <DynamicFaIcon
+                              name={service.service.icon as keyof typeof Icons}
+                            />
                           </a>
                         </div>
                       );

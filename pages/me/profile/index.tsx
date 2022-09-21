@@ -1,8 +1,8 @@
 import type { GetServerSidePropsContext } from "next";
 import { useRouter } from "next/router";
 import { getSession, useSession } from "next-auth/react";
-import type { FormEventHandler} from "react";
-import {useState } from "react";
+import type { FormEventHandler } from "react";
+import { useState } from "react";
 import { toast } from "react-toastify";
 
 import * as api from "@/services";
@@ -18,7 +18,7 @@ export const getServerSideProps = async (
   return { props: { session } };
 };
 
-const MeSettingsIndex: NextPage = () => {
+const MeSettingsIndex = () => {
   const { data: session } = useSession();
   const [displayName, setDisplayName] = useState("");
   const [screenName, setScreenName] = useState("");
@@ -27,13 +27,13 @@ const MeSettingsIndex: NextPage = () => {
 
   if (!session) return "";
 
-  const postProfile: FormEventHandler<HTMLFormElement> = async (e) => {
+  const postProfile: FormEventHandler<HTMLButtonElement> = async (e) => {
     const errors: string[] = [];
     if (!displayName) {
       errors.push("名前を入力してください");
     } else {
       const userExists = await api.getMeUser(screenName);
-      if (userExists.userExists) {
+      if (userExists) {
         errors.push("存在するユーザーです");
       }
     }

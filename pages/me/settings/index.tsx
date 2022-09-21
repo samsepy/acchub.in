@@ -1,8 +1,11 @@
-import type { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
+import type {
+  GetServerSidePropsContext,
+  InferGetServerSidePropsType,
+} from "next";
 import { useRouter } from "next/router";
 import { getSession, useSession } from "next-auth/react";
-import type { MouseEventHandler} from "react";
-import {useState } from "react";
+import type { MouseEventHandler } from "react";
+import { useState } from "react";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { toast } from "react-toastify";
 
@@ -84,7 +87,7 @@ const MeSettingsIndex = ({
       errors.push("アカウントIDを入力してください");
     } else {
       const userExists = await api.getMeUser(screenName);
-      if (userExists.userExists) {
+      if (userExists) {
         errors.push("存在するユーザーです");
       }
     }

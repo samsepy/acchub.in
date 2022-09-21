@@ -5,12 +5,20 @@ import type { NextPage } from "next";
 import type { AppProps } from "next/app";
 import { useRouter } from "next/router";
 import { SessionProvider, useSession } from "next-auth/react";
-import { useEffect } from "react";
+import { ReactNode, useEffect } from "react";
 import { ToastContainer } from "react-toastify";
 
 import { Header } from "@/components/Header";
 
-const ProfileChecker: NextPage = ({ children }) => {
+interface Props {
+  children: React.ReactNode;
+}
+
+const ProfileChecker: React.FC<Props> = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
   const { data: session } = useSession();
   const user = session?.user || null;
   const router = useRouter();
